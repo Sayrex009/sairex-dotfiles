@@ -3,7 +3,7 @@
 A compact, opinionated bspwm "rice" configuration tailored for a dark Catppuccin-like aesthetic. This repository contains a full desktop setup: window manager, hotkeys, status bar, rofi themes, terminal configs and a fastfetch profile.
 
 ## Overview
-![Uploading image.png…]()
+![wallpapers](image.png)
 
 - Window manager: `bspwm` (tiling, lightweight)
 - Hotkeys: `sxhkd` (keybindings and app launcher)
