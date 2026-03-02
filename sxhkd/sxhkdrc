@@ -1,0 +1,155 @@
+#################################################
+#                 SXHKD - Clean                #
+#                by Yusufbek                   #
+#################################################
+
+########################
+# Reload
+########################
+
+super + Escape
+    pkill -USR1 -x sxhkd
+
+
+#################################################
+# APPS
+#################################################
+
+# Terminal
+super + Return
+    kitty
+
+# File manager
+super + e
+    dolphin
+
+# Rofi
+super + d
+    rofi -show drun
+
+# Browser
+ctrl + alt + f
+    google-chrome-stable
+
+
+# VS Code
+ctrl + alt + c
+    code
+
+# IntelliJ
+ctrl + alt + i
+    ~/software/idea-IC-*/bin/idea.sh
+
+# Ranger
+super + r
+    kitty -e ranger
+
+# Nitrogen (floating)
+ctrl + alt + w
+    bspc rule -a Nitrogen state=floating; nitrogen
+
+
+#################################################
+# SYSTEM
+#################################################
+
+# Update system
+super + u
+    kitty -e zsh -c "sudo pacman -Syu"
+
+# Shutdown
+super + alt + s
+    systemctl poweroff
+
+# Reboot
+super + alt + r
+    reboot
+
+# Restart bspwm
+super + shift + r
+    bspc wm -r
+
+
+#################################################
+# AUDIO
+#################################################
+
+# Volume up
+XF86AudioRaiseVolume
+    pulsemixer --change-volume +5
+
+# Volume down
+XF86AudioLowerVolume
+    pulsemixer --change-volume -5
+
+# Mute
+XF86AudioMute
+    pulsemixer --toggle-mute
+
+# Open mixer
+ctrl + alt + v
+    pavucontrol
+
+
+#################################################
+# SCREENSHOTS
+#################################################
+
+# Fullscreen
+Print
+    scrot $HOME/Pictures/Screenshots/%F-%T.png
+
+# Window
+super + Print
+    scrot -u $HOME/Pictures/Screenshots/%F-%T.png
+
+# Region
+super + shift + s
+    scrot -s $HOME/Pictures/Screenshots/%F-%T.png
+
+
+#################################################
+# BSPWM CONTROLS
+#################################################
+
+# Close window
+super + q
+    bspc node -c
+
+# Toggle monocle
+super + m
+    bspc desktop -l next
+
+# Window states
+super + {t,f,s}
+    bspc node -t {tiled,floating,fullscreen}
+
+# Focus windows (vim style)
+super + {h,j,k,l}
+    bspc node -f {west,south,north,east}
+
+# Move windows
+super + shift + {h,j,k,l}
+    bspc node -s {west,south,north,east}
+
+# Resize
+super + alt + {h,j,k,l}
+    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# Workspaces
+super + {1-9,0}
+    bspc desktop -f '^{1-9,10}'
+
+super + shift + {1-9,0}
+    bspc node -d '^{1-9,10}' --follow
+
+
+#################################################
+# DUNST
+#################################################
+
+super + space
+    dunstctl close-all
+
+super + shift + n
+    dunstctl history-pop

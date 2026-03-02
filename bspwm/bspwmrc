@@ -1,0 +1,89 @@
+#! /bin/sh
+
+#
+#                 ░█▀▄░█▀▀░█▀█░█░█░█▄█
+#                 ░█▀▄░▀▀█░█▀▀░█▄█░█░█
+#                 ░▀▀░░▀▀▀░▀░░░▀░▀░▀░▀
+#
+#!/bin/sh
+
+#################################################
+#                 BSPWM - Clean Laptop          #
+#                  by Yusufbek                  #
+#################################################
+
+### Мониторы и рабочие столы
+bspc monitor -d 1 2 3 4 5 6 7 8 9
+
+#################################################
+# Основные настройки
+#################################################
+
+bspc config border_width         2
+bspc config window_gap           12
+bspc config split_ratio          0.55
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config single_monocle       false
+
+# Фокус следует за курсором (удобно на ноутбуке)
+bspc config focus_follows_pointer true
+
+# Цвета (под твой тёмный стиль)
+bspc config focused_border_color   "#89b4fa"
+bspc config normal_border_color    "#313244"
+bspc config active_border_color    "#585b70"
+bspc config presel_feedback_color  "#f38ba8"
+
+#################################################
+# Автозапуск
+#################################################
+
+# Курсор
+xsetroot -cursor_name left_ptr &
+
+# Программа для скриншота Flameshot 
+pgrep -x flameshot > /dev/null || flameshot &
+
+# Горячие клавиши
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+# Обои
+nitrogen --restore &
+
+# PolicyKit
+pgrep -x lxpolkit > /dev/null || lxpolkit &
+
+# Уведомления
+pgrep -x dunst > /dev/null || dunst &
+
+# Polybar
+~/.config/polybar/launch.sh &
+
+# Раскладка клавиатуры (US + RU)
+setxkbmap -layout us,ru -option grp:win_space_toggle &
+
+#################################################
+# Правила окон
+#################################################
+
+# Плавающие окна
+bspc rule -a Pavucontrol state=floating
+bspc rule -a Blueman-manager state=floating
+bspc rule -a feh state=floating
+bspc rule -a mpv state=floating
+
+# Firefox на 2 рабочий стол
+bspc rule -a google-chrome-stable desktop='^2'
+
+# Telegram на 8
+bspc rule -a TelegramDesktop desktop='^9'
+
+#################################################
+# Энергосбережение (ноутбук)
+#################################################
+
+# Отключаем авто-блокировку экрана
+xset -dpms
+xset s off
+
