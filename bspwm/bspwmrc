@@ -36,8 +36,11 @@ bspc config active_border_color    "#585b70"
 bspc config presel_feedback_color  "#f38ba8"
 
 #################################################
-# Автозапуск
+#Автозапуск
 #################################################
+
+#Picom (композитный менеджер для теней и прозрачности)
+picom --config ~/.config/picom/picom.conf &
 
 # Курсор
 xsetroot -cursor_name left_ptr &
